@@ -9,7 +9,7 @@ Usage (direct):
 
 Usage (import into another script)
     import sys
-    sys.path.insert(1, '/home/brandsena/timeperiod-to-daterange/')
+    sys.path.insert(1, 'timeperiod-to-daterange/') # path to folder
     import timeperiod2daterange
     timeperiod2daterange.detection2daterange('1200 n. Chr') # output: [1200, 1200]
 
