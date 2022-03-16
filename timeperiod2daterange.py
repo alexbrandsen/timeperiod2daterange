@@ -1,5 +1,22 @@
 #!/usr/bin/env python
 #-*- coding: cp1252 -*-
+"""
+
+Converts a string containing one or more Dutch time period(s) to a list containing the start year and end year for that expression
+
+Usage (direct):
+    ./timeperiod2daterange.py
+
+Usage (import into another script)
+    import sys
+    sys.path.insert(1, '/home/brandsena/timeperiod-to-daterange/')
+    import timeperiod2daterange
+    timeperiod2daterange.detection2daterange('1200 n. Chr') # output: [1200, 1200]
+
+Author:
+    Alex Brandsen
+    
+"""
 
 
 
@@ -18,6 +35,9 @@ import editdistance
 
 # set debug, if 1, print verbose info
 debug = 0
+
+# set location of ontology (csv format)
+ontologyLocation = 'ontologies/periodo_extended.csv'
 
 # set current year
 now = datetime.datetime.now()
@@ -114,7 +134,7 @@ def ontology2dict(location):
         return output
 
 # get ontology
-ontology = ontology2dict('ontologies/periodo_extended.csv')
+ontology = ontology2dict(ontologyLocation)
 
 # checks if string is a defined time period, or very similar to one, returns [startdate,enddate] or False if no match     
 def check_ontology(string, do_ngrams = True):
@@ -726,11 +746,14 @@ def postCorrectDates(startdate,enddate,multiDates = False):
 
 # EXAMPLES: take named entity detection (can contain multiple time periods, e.g. "Middeleeuwen tot Moderne Tijd"), return daterange
 
-#detection2daterange('1200 n. Chr')
+#detection2daterange('1200 n. Chr') 
+    # output: [1200, 1200]
 
-#detection2daterange('Middeleeuwen tot Moderne Tijd')
+#detection2daterange('Middeleeuwen tot Moderne Tijd') 
+    # output: [450, 1945]
 
-#detection2daterange('eerste helft van de 2e eeuw')
+#detection2daterange('eerste helft van de 2e eeuw') 
+    # output: [100, 149]
 
 
 
