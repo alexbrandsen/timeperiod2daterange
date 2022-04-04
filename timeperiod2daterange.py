@@ -534,8 +534,8 @@ def timeperiod2daterange(timeperiod, timeType = 'AD'):
                     
             if date:
                 if errormargin:
-                    startdate = date+round(errormargin/2)
-                    enddate = date-round(errormargin/2)
+                    startdate = date+round(errormargin)
+                    enddate = date-round(errormargin)
                     daterange = [startdate,enddate]
                 else:
                     daterange = [date,date]
