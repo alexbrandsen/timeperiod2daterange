@@ -28,7 +28,7 @@ import re
 import datetime
 from nltk.util import ngrams
 import editdistance
-
+import os
 
 
 # OPTIONS ---------------------------------------------------
@@ -43,6 +43,14 @@ ontologyLocation = 'ontologies/periodo_extended.csv'
 now = datetime.datetime.now()
 currentYear = now.year
 
+
+
+# set cwd to open ontology file, undo at the end
+
+global_cwd = os.getcwd()
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 
 
@@ -456,6 +464,8 @@ def timeperiod2daterange(timeperiod, timeType = 'AD'):
             
         # year + BC/AD (300 v. chr.)
         elif 'chr' in timeperiod or ' bc' in timeperiod:
+            if timeperiod[0:1] == '.': # remove full stop at start, otherwise regex below will error
+                timeperiod = timeperiod[1:]
             result = int(extract_digits.search(timeperiod).group(0).replace('.','').replace(',',''))
             daterange = [result,result]
             if debug:
@@ -739,6 +749,16 @@ def postCorrectDates(startdate,enddate,multiDates = False):
             enddate = startdate
     
     return [startdate,enddate]
+
+
+# run argument, if provided from command line
+if len(sys.argv) > 1:
+    print(detection2daterange(sys.argv[1]))
+
+
+# set cwd back to global cwd
+os.chdir(global_cwd)
+
 
 
 
