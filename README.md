@@ -3,7 +3,9 @@ A tool that converts Dutch time period entities to standardised date ranges.
 
 Usage (direct):
 
-    ./timeperiod2daterange.py
+    ./timeperiod2daterange.py "middeleeuwen tot nieuwe tijd"
+	
+	(output: \[450, 1944\])
 
 Usage (import into another script)
 
