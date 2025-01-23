@@ -5,7 +5,7 @@ Usage (direct):
 
     ./timeperiod2daterange.py "middeleeuwen tot nieuwe tijd"
 	
-	(output: \[450, 1944\])
+	(output: [450, 1944])
 
 Usage (import into another script)
 
